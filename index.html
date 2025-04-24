@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Symptom Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007acc;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005b99;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e0f7fa;
+      border-left: 5px solid #007acc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Symptom Checker</h1>
+    <label for="symptoms">Enter your symptoms:</label>
+    <textarea id="symptoms" placeholder="e.g., headache, sore throat, fatigue..."></textarea>
+    <button onclick="checkSymptoms()">Check Symptoms</button>
+
+    <div class="result" id="result" style="display: none;"></div>
+  </div>
+
+  <script>
+    function checkSymptoms() {
+      const symptomsInput = document.getElementById("symptoms").value;
+      const resultDiv = document.getElementById("result");
+
+      if (symptomsInput.trim() === "") {
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = "⚠️ Please enter some symptoms to check.";
+        return;
+      }
+
+      // This is a placeholder. You can connect this to an AI model later.
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = `
+        🤖 Based on your symptoms ("${symptomsInput}"), you may be experiencing:
+        <ul>
+          <li>Common Cold</li>
+          <li>Flu</li>
+          <li>Allergies</li>
+        </ul>
+        <p>🩺 Please consult a medical professional for an accurate diagnosis.</p>
+      `;
+    }
+  </script>
+  <script>
+    
+  </script>
+</body>
+<script>
+    let dataset = [];
+
+    // Load dataset from symptoms.json
+    fetch('symptoms.json')
+      .then(response => response.json())
+      .then(data => {
+        dataset = data;
+        console.log("Dataset loaded:", dataset);
+      })
+      .catch(error => {
+        console.error("Error loading dataset:", error);
+      });
+
+    function checkSymptoms() {
+      const input = document.getElementById('userSymptoms').value.toLowerCase();
+      const userSymptoms = input.split(',').map(s => s.trim());
+      let resultDiv = document.getElementById('result');
+
+      // Search in dataset
+      const matched = dataset.find(entry =>
+        entry.symptoms.some(symptom => userSymptoms.includes(symptom.toLowerCase()))
+      );
+
+      if (matched) {
+        resultDiv.innerHTML = `🤖 Possible Diagnosis: <strong>${matched.diagnosis}</strong>`;
+      } else {
+        resultDiv.innerHTML = "⚠️ No match found. Please consult a doctor.";
+      }
+    }
+  </script>
+</body>
+ let dataset = [];
+
+    // Load dataset from symptoms.json
+    fetch('symptoms.json')
+      .then(response => response.json())
+      .then(data => {
+        dataset = data;
+        console.log("Dataset loaded:", dataset);
+      })
+      .catch(error => {
+        console.error("Error loading dataset:", error);
+      });
+
+    function checkSymptoms() {
+      const input = document.getElementById('userSymptoms').value.toLowerCase();
+      const userSymptoms = input.split(',').map(s => s.trim());
+      let resultDiv = document.getElementById('result');
+
+      // Search in dataset
+      const matched = dataset.find(entry =>
+        entry.symptoms.some(symptom => userSymptoms.includes(symptom.toLowerCase()))
+      );
+
+      if (matched) {
+        resultDiv.innerHTML = `🤖 Possible Diagnosis: <strong>${matched.diagnosis}</strong>`;
+      } else {
+        resultDiv.innerHTML = "⚠️ No match found. Please consult a doctor.";
+      }
+    }
+  </script>
+</body>
+</html>
+
+</body>
+</html>
